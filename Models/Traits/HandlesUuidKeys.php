@@ -53,13 +53,18 @@ trait HandlesUuidKeys
     }
 
     /**
-     * Helper method to merge new casts into the model's existing casts.
+     * Merge new casts with existing casts on the model.
      *
-     * @param  array $casts
+     * @param  array  $casts
+     * @return $this
      */
-    public function mergeCasts(array $casts): void
+    public function mergeCasts($casts): static
     {
+        $casts = $this->ensureCastsAreStringValues($casts);
+
         $this->casts = array_merge($this->casts, $casts);
+
+        return $this;
     }
 
 
